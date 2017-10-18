@@ -27,6 +27,7 @@ var common = {
       commonjs: 'underscore'
     },
     Meteor: 'Meteor',
+    'meteor/mongo': 'meteor/mongo',
     Package: 'Package',
     Tracker: 'Tracker'
   },

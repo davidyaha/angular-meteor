@@ -1,8 +1,9 @@
 /*global
-  angular, _, Mongo
+  angular
 */
 
 import _ from '../lib/underscore';
+import { Mongo } from 'meteor/mongo';
 
 'use strict';
 

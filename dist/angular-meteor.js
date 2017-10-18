@@ -1,14 +1,14 @@
 /*! angular-meteor v1.3.12 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("underscore"), require("jsondiffpatch"));
+		module.exports = factory(require("underscore"), require("meteor/mongo"), require("jsondiffpatch"));
 	else if(typeof define === 'function' && define.amd)
-		define(["underscore", "jsondiffpatch"], factory);
+		define(["underscore", "meteor/mongo", "jsondiffpatch"], factory);
 	else if(typeof exports === 'object')
-		exports["angularMeteor"] = factory(require("underscore"), require("jsondiffpatch"));
+		exports["angularMeteor"] = factory(require("underscore"), require("meteor/mongo"), require("jsondiffpatch"));
 	else
-		root["angularMeteor"] = factory(root["_"], root["jsondiffpatch"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_22__) {
+		root["angularMeteor"] = factory(root["_"], root["meteor/mongo"], root["jsondiffpatch"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_23__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -71,8 +71,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(7);
 
-	__webpack_require__(8);
-
 	__webpack_require__(9);
 
 	__webpack_require__(10);
@@ -87,19 +85,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(15);
 
-	var _utils = __webpack_require__(16);
+	__webpack_require__(16);
 
-	var _mixer = __webpack_require__(17);
+	var _utils = __webpack_require__(17);
 
-	var _scope = __webpack_require__(18);
+	var _mixer = __webpack_require__(18);
 
-	var _core = __webpack_require__(19);
+	var _scope = __webpack_require__(19);
 
-	var _viewModel = __webpack_require__(20);
+	var _core = __webpack_require__(20);
 
-	var _reactive = __webpack_require__(21);
+	var _viewModel = __webpack_require__(21);
 
-	var _templates = __webpack_require__(23);
+	var _reactive = __webpack_require__(22);
+
+	var _templates = __webpack_require__(24);
 
 	// legacy
 	// lib
@@ -609,12 +609,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /*global
-	                                                                                                                                                                                                                                                                               angular, _, Tracker, EJSON, FS, Mongo
+	                                                                                                                                                                                                                                                                               angular, Tracker, EJSON, FS
 	                                                                                                                                                                                                                                                                               */
 
 	var _underscore = __webpack_require__(2);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _mongo = __webpack_require__(8);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -691,7 +693,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  this.getCollectionByName = function (string) {
-	    return Mongo.Collection.get(string);
+	    return _mongo.Mongo.Collection.get(string);
 	  };
 
 	  this.findIndexById = function (collection, doc) {
@@ -712,6 +714,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports) {
 
 	/*global
@@ -787,7 +795,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -796,11 +804,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
+	var _mongo = __webpack_require__(8);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	'use strict'; /*global
-	               angular, _, Tracker, check, Match, Mongo
-	               */
+	/*global
+	 angular, Tracker, check, Match
+	 */
+
+	'use strict';
 
 	var angularMeteorCollection = angular.module('angular-meteor.collection', ['angular-meteor.stopper', 'angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray', 'angular-meteor.settings']);
 
@@ -954,7 +966,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	    // Checks if all keys are correct.
-	    check(keys, [Match.OneOf(String, Mongo.ObjectID)]);
+	    check(keys, [Match.OneOf(String, _mongo.Mongo.ObjectID)]);
 
 	    var promises = keys.map(function (key) {
 	      return this._removeDoc(key);
@@ -1170,7 +1182,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1179,11 +1191,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
+	var _mongo = __webpack_require__(8);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	'use strict'; /*global
-	                angular, _, Mongo
-	              */
+	/*global
+	  angular
+	*/
+
+	'use strict';
 
 	var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray', 'angular-meteor.settings']);
 
@@ -1313,9 +1329,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var doc = this.$$collection.findOne(selector, options);
 
 	    if (doc) return doc._id;
-	    if (selector instanceof Mongo.ObjectID) return selector;
+	    if (selector instanceof _mongo.Mongo.ObjectID) return selector;
 	    if (_underscore2.default.isString(selector)) return selector;
-	    return new Mongo.ObjectID();
+	    return new _mongo.Mongo.ObjectID();
 	  };
 
 	  return AngularMeteorObject;
@@ -1368,7 +1384,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1462,7 +1478,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1492,7 +1508,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 	/*global
@@ -1526,7 +1542,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 	/*global
@@ -1556,7 +1572,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 	/*global
@@ -1595,7 +1611,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1676,7 +1692,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1759,7 +1775,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Extend prototype with the defined mixins
 	  this._extend = function (obj, options) {
 	    var _$defaults = _underscore2.default.defaults({}, options, {
-	      pattern: /.*/ }),
+	      pattern: /.*/ // The patterns of the keys which will be filtered
+	    }),
 	        pattern = _$defaults.pattern,
 	        context = _$defaults.context;
 
@@ -1813,7 +1830,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1823,7 +1840,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.name = undefined;
 
-	var _mixer = __webpack_require__(17);
+	var _mixer = __webpack_require__(18);
 
 	var name = exports.name = 'angular-meteor.scope';
 
@@ -1845,7 +1862,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1859,9 +1876,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _utils = __webpack_require__(16);
+	var _utils = __webpack_require__(17);
 
-	var _mixer = __webpack_require__(17);
+	var _mixer = __webpack_require__(18);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2035,7 +2052,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2051,11 +2068,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _utils = __webpack_require__(16);
+	var _utils = __webpack_require__(17);
 
-	var _mixer = __webpack_require__(17);
+	var _mixer = __webpack_require__(18);
 
-	var _core = __webpack_require__(19);
+	var _core = __webpack_require__(20);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2148,7 +2165,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2158,7 +2175,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.Reactive = exports.name = undefined;
 
-	var _jsondiffpatch = __webpack_require__(22);
+	var _jsondiffpatch = __webpack_require__(23);
 
 	var _jsondiffpatch2 = _interopRequireDefault(_jsondiffpatch);
 
@@ -2166,13 +2183,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _utils = __webpack_require__(16);
+	var _utils = __webpack_require__(17);
 
-	var _mixer = __webpack_require__(17);
+	var _mixer = __webpack_require__(18);
 
-	var _core = __webpack_require__(19);
+	var _core = __webpack_require__(20);
 
-	var _viewModel = __webpack_require__(20);
+	var _viewModel = __webpack_require__(21);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2465,13 +2482,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_22__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_23__;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 	'use strict';
